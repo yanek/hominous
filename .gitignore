@@ -1,0 +1,5 @@
+.idea/
+node_modules/
+database.sqlite
+.env
+backend/dist/
