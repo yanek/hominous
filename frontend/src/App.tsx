@@ -11,6 +11,7 @@ function App() {
       .get<Category[]>('/categories')
       .then((response) => {
         const data: Category[] = response.data;
+        data.sort((a, b) => a.order - b.order);
         setCategories(data);
       })
       .catch((error) => console.error(error));
