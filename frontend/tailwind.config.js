@@ -9,5 +9,10 @@ export default {
       hack: ['Hack', 'monospace'],
     },
   },
-  plugins: [tailwindcss()],
+  plugins: [
+    tailwindcss({
+      prefix: 'ctp',
+      defaultFlavour: 'mocha',
+    }),
+  ],
 };
