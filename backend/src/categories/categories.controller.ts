@@ -57,7 +57,7 @@ export class CategoriesController {
    *
    * @param updateCategoryDto The data to use for updating the category.
    */
-  @Put(':id')
+  @Put()
   @HttpCode(HttpStatus.NO_CONTENT)
   async update(@Body() updateCategoryDto: UpdateCategoryDto): Promise<void> {
     await this.categoriesService.update(updateCategoryDto);
