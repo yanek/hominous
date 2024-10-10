@@ -1,4 +1,4 @@
-import CategoryBlock from './components/CategoryBlock.tsx';
+import Section from './components/Section.tsx';
 import { Category } from './types/category.ts';
 import { useEffect, useState } from 'react';
 import http from './http-commons.ts';
@@ -53,7 +53,7 @@ function App() {
           }
         >
           {categories.map((category) => (
-            <CategoryBlock key={category.id} category={category} />
+            <Section key={category.id} category={category} />
           ))}
         </div>
       </main>
