@@ -10,13 +10,9 @@ function EditCategoryForm({ category }: EditCategoryFormProps) {
   function change(event: ChangeEvent<HTMLInputElement>) {
     category.label = event.target.value;
 
-    if (category.id > 0) {
-      http.put('/categories', category).catch((error) => {
-        console.error(error);
-      });
-    } else {
-      // TODO: POST
-    }
+    http.put('/categories', category).catch((error) => {
+      console.error(error);
+    });
   }
 
   return (

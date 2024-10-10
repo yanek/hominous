@@ -18,13 +18,9 @@ function EditLinkForm({ link }: EditLinkFormProps) {
         break;
     }
 
-    if (link.id > 0) {
-      http.put('/links', link).catch((error) => {
-        console.error(error);
-      });
-    } else {
-      // TODO: POST
-    }
+    http.put('/links', link).catch((error) => {
+      console.error(error);
+    });
   }
 
   return (
