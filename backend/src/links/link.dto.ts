@@ -22,7 +22,7 @@ export class CreateLinkDto {
 }
 
 export class UpdateLinkDto {
-  @IsUrl()
+  @IsUrl({ require_tld: false })
   @IsNotEmpty()
   url: string;
 
