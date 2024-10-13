@@ -10,9 +10,11 @@ function EditCategoryForm({ category }: EditCategoryFormProps) {
   function change(event: ChangeEvent<HTMLInputElement>) {
     category.label = event.target.value;
 
-    http.put('/categories', category).catch((error) => {
-      console.error(error);
-    });
+    http
+      .put(`/categories/${category.id}`, { label: category.label })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (

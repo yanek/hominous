@@ -18,9 +18,15 @@ function EditLinkForm({ link }: EditLinkFormProps) {
         break;
     }
 
-    http.put('/links', link).catch((error) => {
-      console.error(error);
-    });
+    http
+      .put(`/links/${link.id}`, {
+        label: link.label,
+        url: link.url,
+        categoryId: link.category.id,
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
