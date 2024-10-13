@@ -1,6 +1,9 @@
-export interface CreateCategoryDto {
+import { IsInt, IsString, Length } from 'class-validator';
+
+export class CreateCategoryDto {
+  @IsString()
+  @Length(2, 30)
   label: string;
-  order: number;
 }
 
 export interface UpdateCategoryDto {
