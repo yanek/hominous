@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Link } from './link.entity';
 import { DataSource } from 'typeorm';
 import { Category } from '../categories/category.entity';
@@ -67,21 +67,21 @@ export class LinksService {
   /**
    * Updates a link.
    *
+   * @param id The ID of the link to update.
    * @param dto The data to use for updating the link.
    * @throws Error If the link with the given ID does not exist.
    */
-  async update(dto: UpdateLinkDto): Promise<void> {
-    const link: Link | null = await this.find(dto.id);
+  async update(id: number, dto: UpdateLinkDto): Promise<Link> {
+    const link: Link | null = await this.find(id);
 
     if (!link) {
-      throw new Error(`Link with id ${dto.id} not found`);
+      throw new NotFoundException(`Link with id ${id} not found`);
     }
 
     link.url = dto.url;
     link.label = dto.label;
-    link.category = new Category();
-    link.category.id = dto.categoryId;
     await this.dataSource.getRepository(Link).save(link);
+    return link;
   }
 
   /**
@@ -94,7 +94,7 @@ export class LinksService {
     const link: Link | null = await this.find(id);
 
     if (!link) {
-      throw new Error(`Link with id ${id} not found`);
+      throw new NotFoundException(`Link with id ${id} not found`);
     }
 
     await this.dataSource.getRepository(Link).remove(link);

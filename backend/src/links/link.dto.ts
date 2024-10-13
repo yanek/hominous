@@ -22,10 +22,6 @@ export class CreateLinkDto {
 }
 
 export class UpdateLinkDto {
-  @IsInt()
-  @IsPositive()
-  id: number;
-
   @IsUrl()
   @IsNotEmpty()
   url: string;

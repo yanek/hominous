@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
-import { CreateCategoryDto, UpdateCategoryDto } from './category.dto';
+import { ChangeCategoryLabelDto, CreateCategoryDto } from './category.dto';
 
 @Controller('categories')
 export class CategoriesController {
@@ -41,26 +41,28 @@ export class CategoriesController {
   /**
    * Creates a new category.
    *
-   * @param createCategoryDto The data to use for creating the category.
+   * @param dto The data to use for creating the category.
    * @returns A promise that resolves to the newly created category.
    */
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(
-    @Body() createCategoryDto: CreateCategoryDto,
-  ): Promise<Category> {
-    return await this.categoriesService.create(createCategoryDto);
+  async create(@Body() dto: CreateCategoryDto): Promise<Category> {
+    return await this.categoriesService.create(dto);
   }
 
   /**
    * Updates a category.
    *
-   * @param updateCategoryDto The data to use for updating the category.
+   * @param id The ID of the category to update.
+   * @param dto The data to use for updating the category.
    */
-  @Put()
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async update(@Body() updateCategoryDto: UpdateCategoryDto): Promise<void> {
-    await this.categoriesService.update(updateCategoryDto);
+  @Put(':id')
+  @HttpCode(HttpStatus.OK)
+  async update(
+    @Param('id') id: number,
+    @Body() dto: ChangeCategoryLabelDto,
+  ): Promise<Category> {
+    return await this.categoriesService.update(id, dto);
   }
 
   /**

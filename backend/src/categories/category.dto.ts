@@ -6,8 +6,13 @@ export class CreateCategoryDto {
   label: string;
 }
 
-export interface UpdateCategoryDto {
-  id: number;
+export class ChangeCategoryLabelDto {
+  @IsString()
+  @Length(2, 30)
   label: string;
+}
+
+export class ChangeCategoryOrderDto {
+  @IsInt()
   order: number;
 }

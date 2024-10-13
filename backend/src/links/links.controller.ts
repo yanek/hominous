@@ -64,20 +64,22 @@ export class LinksController {
   /**
    * Updates a link.
    *
+   * @param id The ID of the link to update.
    * @param updateLinkDto The data to use for updating the link.
-   * @throws Error If the link with the given ID does not exist.
    */
-  @Put()
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async update(@Body() updateLinkDto: UpdateLinkDto): Promise<void> {
-    await this.linksService.update(updateLinkDto);
+  @Put(':id')
+  @HttpCode(HttpStatus.OK)
+  async update(
+    @Param('id') id: number,
+    @Body() updateLinkDto: UpdateLinkDto,
+  ): Promise<Link> {
+    return await this.linksService.update(id, updateLinkDto);
   }
 
   /**
    * Deletes a link.
    *
    * @param id The ID of the link to delete.
-   * @throws Error If the link with the given ID does not exist.
    */
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
