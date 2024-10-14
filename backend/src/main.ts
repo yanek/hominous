@@ -9,6 +9,7 @@ async function bootstrap() {
   app.enableCors({ origin: '*' });
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.setGlobalPrefix('api', { exclude: ['robots.txt'] });
   await app.listen(3000);
 }
 

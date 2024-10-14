@@ -9,6 +9,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { Category } from './categories/category.entity';
 import { CategoriesService } from './categories/categories.service';
 import { CategoriesController } from './categories/categories.controller';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { CategoriesController } from './categories/categories.controller';
     LinksModule,
     CategoriesModule,
   ],
-  controllers: [LinksController, CategoriesController],
+  controllers: [AppController, LinksController, CategoriesController],
   providers: [LinksService, CategoriesService],
 })
 export class AppModule {}
