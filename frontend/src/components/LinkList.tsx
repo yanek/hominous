@@ -1,8 +1,8 @@
 import LinkItem from './LinkItem.tsx';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from '../types/link.ts';
-import { EditModeContext } from '../contexts/EditModeContext.ts';
 import http from '../http-commons.ts';
+import { EditModeContext } from '../contexts.ts';
 
 interface LinkListProps {
   categoryId: number;
@@ -11,16 +11,6 @@ interface LinkListProps {
 function LinkList({ categoryId }: LinkListProps) {
   const [links, setLinks] = useState<Link[]>([]);
   const isEditMode = useContext(EditModeContext);
-
-  function getLinks() {
-    http
-      .get<Link[]>('/links/category/' + categoryId)
-      .then((resp) => {
-        const data: Link[] = resp.data;
-        setLinks(data);
-      })
-      .catch((err) => console.error(err));
-  }
 
   function handleNewLink() {
     http
@@ -36,7 +26,15 @@ function LinkList({ categoryId }: LinkListProps) {
       .catch((err) => console.error(err));
   }
 
-  useEffect(() => getLinks(), []);
+  useEffect(() => {
+    http
+      .get<Link[]>('/links/category/' + categoryId)
+      .then((resp) => {
+        const data: Link[] = resp.data;
+        setLinks(data);
+      })
+      .catch((err) => console.error(err));
+  }, [categoryId]);
 
   if (!links) {
     return <div>Loading...</div>;
