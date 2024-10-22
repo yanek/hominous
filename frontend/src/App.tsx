@@ -2,11 +2,23 @@ import Section from './components/Section.tsx';
 import { Category } from './types/category.ts';
 import { useEffect, useState } from 'react';
 import http from './http-commons.ts';
-import { EditModeContext } from './contexts/EditModeContext.ts';
+import { EditModeContext } from './contexts.ts';
 
 function App() {
-  const [categories, setCategories] = useState<Category[] | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isEditMode, setEditMode] = useState(false);
+
+  function handleNewCategory() {
+    http
+      .post<Category>('/categories', {
+        label: 'unnamed',
+      })
+      .then((resp) => {
+        const data: Category = resp.data;
+        setCategories([...categories, data]);
+      })
+      .catch((err) => console.error(err));
+  }
 
   useEffect(() => {
     http
@@ -32,7 +44,10 @@ function App() {
           </h1>
           <div className="text-ctp-surface2 select-none flex gap-2">
             {isEditMode ? (
-              <button className="h-6 text-ctp-green hover:text-ctp-text hover:cursor-pointer">
+              <button
+                className="h-6 text-ctp-green hover:text-ctp-text hover:cursor-pointer"
+                onClick={handleNewCategory}
+              >
                 [new_category]
               </button>
             ) : null}
