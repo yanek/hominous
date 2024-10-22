@@ -34,3 +34,9 @@ export class UpdateLinkDto {
   @IsPositive()
   categoryId: number;
 }
+
+export class ChangeLinkOrderDto {
+  @IsInt()
+  @IsPositive()
+  order: number;
+}

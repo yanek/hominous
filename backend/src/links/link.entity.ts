@@ -20,6 +20,9 @@ export class Link extends BaseEntity {
   @Column()
   label: string = '';
 
+  @Column()
+  order: number = 0;
+
   @ManyToOne(() => Category, (category) => category.links, { eager: true })
   category: Category | undefined;
 
