@@ -1,0 +1,14 @@
+logs
+*.log
+*.tsbuildinfo
+
+node_modules
+dist
+*.local
+.env
+
+*.sqlite
+
+.vscode
+.idea
+.DS_Store
